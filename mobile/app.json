@@ -26,13 +26,7 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router",
-      [
-        "expo-sqlite",
-        {
-          "enableFTS": true
-        }
-      ]
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true,
