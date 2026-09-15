@@ -1,0 +1,123 @@
+// KurazPrep ESSLCE Preparation Platform Prisma Schema
+// Configured for Supabase PostgreSQL with PgBouncer connection pooling and direct connection
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Stream {
+  NATURAL
+  SOCIAL
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  name         String
+  stream       Stream?
+  gradeLevel   Int?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  quizAttempts QuizAttempt[]
+
+  @@map("users")
+}
+
+model Subject {
+  id           String         @id @default(uuid())
+  name         String
+  stream       Stream
+  gradeLevel   Int            // 11 or 12
+  icon         String?        // Icon identifier for mobile UI
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  units        Unit[]
+  quizAttempts QuizAttempt[]
+  syncMetadata SyncMetadata?
+
+  @@index([stream, gradeLevel])
+  @@map("subjects")
+}
+
+model Unit {
+  id          String      @id @default(uuid())
+  subjectId   String
+  subject     Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  unitNumber  Int
+  title       String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  shortNotes  ShortNote[]
+  questions   Question[]
+
+  @@unique([subjectId, unitNumber])
+  @@index([subjectId])
+  @@map("units")
+}
+
+model ShortNote {
+  id              String   @id @default(uuid())
+  unitId          String
+  unit            Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  title           String
+  contentMarkdown String   @db.Text
+  isHighYield     Boolean  @default(false)
+  orderIndex      Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([unitId])
+  @@map("short_notes")
+}
+
+model Question {
+  id              String   @id @default(uuid())
+  unitId          String
+  unit            Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  prompt          String   @db.Text
+  optionsJson     Json     // Array of { id: string, text: string }
+  correctOptionId String
+  explanation     String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([unitId])
+  @@map("questions")
+}
+
+model QuizAttempt {
+  id             String   @id @default(uuid())
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  subjectId      String
+  subject        Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  unitId         String?
+  score          Float
+  totalQuestions Int      @default(0)
+  correctCount   Int      @default(0)
+  isSynced       Boolean  @default(true)
+  completedAt    DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+  @@index([subjectId])
+  @@map("quiz_attempts")
+}
+
+model SyncMetadata {
+  id          String   @id @default(uuid())
+  subjectId   String   @unique
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  contentHash String
+  version     Int      @default(1)
+  lastUpdated DateTime @default(now()) @updatedAt
+
+  @@map("sync_metadata")
+}

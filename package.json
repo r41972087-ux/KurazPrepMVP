@@ -1,0 +1,17 @@
+{
+  "name": "kurazprep-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "mobile"
+  ],
+  "scripts": {
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:build": "npm run build --workspace=backend",
+    "backend:typecheck": "npm run typecheck --workspace=backend",
+    "mobile:start": "npm run start --workspace=mobile",
+    "mobile:typecheck": "npm run typecheck --workspace=mobile",
+    "typecheck": "npm run backend:typecheck && npm run mobile:typecheck"
+  }
+}
