@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { db, initializeTablesSync } from '../db/client';
 import migrations from '../drizzle/migrations';
 
+function useAppMigrations() {
+  if (Platform.OS === 'web') {
+    return { success: true, error: null };
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return useMigrations(db, migrations);
+}
+
 export default function RootLayout() {
-  const { success, error } = useMigrations(db, migrations);
+  const { success, error } = useAppMigrations();
 
   useEffect(() => {
     // Synchronously ensure tables are created on boot
