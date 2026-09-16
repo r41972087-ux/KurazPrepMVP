@@ -102,7 +102,15 @@ export const QuizCard: React.FC<QuizCardProps> = ({
               disabled={hasSubmitted || disabled}
             >
               <View style={[styles.letterBox, letterBoxStyle]}>
-                <Text style={styles.letterText}>{letter}</Text>
+                <Text
+                  style={[
+                    styles.letterText,
+                    (isSelected || (hasSubmitted && (isCorrect || isSelected))) &&
+                      styles.letterTextSelected,
+                  ]}
+                >
+                  {letter}
+                </Text>
               </View>
               <Text style={[styles.optionText, textStyle]}>{option.text}</Text>
             </TouchableOpacity>
@@ -123,12 +131,17 @@ export const QuizCard: React.FC<QuizCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     borderRadius: 16,
     padding: 20,
     marginVertical: 10,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   header: {
     flexDirection: 'row',
@@ -139,7 +152,7 @@ const styles = StyleSheet.create({
   counterText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#64748B',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -149,25 +162,25 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   badgeCorrect: {
-    backgroundColor: 'rgba(16, 185, 129, 0.2)',
-    borderColor: '#10B981',
+    backgroundColor: '#DCFCE7',
+    borderColor: '#86EFAC',
     borderWidth: 1,
   },
   badgeIncorrect: {
-    backgroundColor: 'rgba(239, 68, 68, 0.2)',
-    borderColor: '#EF4444',
+    backgroundColor: '#FEE2E2',
+    borderColor: '#FCA5A5',
     borderWidth: 1,
   },
   badgeText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   prompt: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '600',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginBottom: 18,
   },
   optionsContainer: {
@@ -181,24 +194,24 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
   },
   optionNormal: {
-    backgroundColor: '#0F172A',
-    borderColor: '#334155',
+    backgroundColor: '#F8FAFC',
+    borderColor: '#E2E8F0',
   },
   optionSelected: {
-    backgroundColor: '#1E3A8A',
-    borderColor: '#38BDF8',
+    backgroundColor: '#EFF6FF',
+    borderColor: '#2563EB',
   },
   optionCorrect: {
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    backgroundColor: '#F0FDF4',
     borderColor: '#10B981',
   },
   optionIncorrect: {
-    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+    backgroundColor: '#FEF2F2',
     borderColor: '#EF4444',
   },
   optionDimmed: {
-    backgroundColor: '#0F172A',
-    borderColor: '#1E293B',
+    backgroundColor: '#F8FAFC',
+    borderColor: '#F1F5F9',
     opacity: 0.5,
   },
   letterBox: {
@@ -210,10 +223,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   letterBoxNormal: {
-    backgroundColor: '#334155',
+    backgroundColor: '#E2E8F0',
   },
   letterBoxSelected: {
-    backgroundColor: '#38BDF8',
+    backgroundColor: '#2563EB',
   },
   letterBoxCorrect: {
     backgroundColor: '#10B981',
@@ -224,7 +237,10 @@ const styles = StyleSheet.create({
   letterText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E293B',
+  },
+  letterTextSelected: {
+    color: '#FFFFFF',
   },
   optionText: {
     flex: 1,
@@ -232,33 +248,33 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   optionTextNormal: {
-    color: '#E2E8F0',
+    color: '#1E293B',
   },
   optionTextCorrect: {
-    color: '#6EE7B7',
+    color: '#059669',
     fontWeight: '600',
   },
   optionTextIncorrect: {
-    color: '#FCA5A5',
+    color: '#DC2626',
   },
   explanationBox: {
     marginTop: 18,
     padding: 14,
-    backgroundColor: 'rgba(56, 189, 248, 0.08)',
+    backgroundColor: '#EFF6FF',
     borderRadius: 10,
     borderLeftWidth: 3,
-    borderLeftColor: '#38BDF8',
+    borderLeftColor: '#2563EB',
   },
   explanationTitle: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#38BDF8',
+    color: '#1E40AF',
     marginBottom: 4,
     textTransform: 'uppercase',
   },
   explanationContent: {
     fontSize: 14,
-    color: '#CBD5E1',
+    color: '#334155',
     lineHeight: 20,
   },
 });

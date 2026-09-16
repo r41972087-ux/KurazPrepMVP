@@ -18,7 +18,6 @@ export default function RootLayout() {
   const { success, error } = useAppMigrations();
 
   useEffect(() => {
-    // Synchronously ensure tables are created on boot
     try {
       initializeTablesSync();
     } catch (e) {
@@ -39,7 +38,7 @@ export default function RootLayout() {
   if (!success) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#38BDF8" />
+        <ActivityIndicator size="large" color="#2563EB" />
         <Text style={styles.loadingText}>Initializing KurazPrep Offline Engine...</Text>
       </View>
     );
@@ -47,13 +46,14 @@ export default function RootLayout() {
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <Stack
         screenOptions={{
-          headerStyle: { backgroundColor: '#0F172A' },
-          headerTintColor: '#F8FAFC',
-          headerTitleStyle: { fontWeight: '700' },
-          contentStyle: { backgroundColor: '#0B0F19' },
+          headerStyle: { backgroundColor: '#FFFFFF' },
+          headerTintColor: '#1E3A8A',
+          headerTitleStyle: { fontWeight: '700', color: '#1E3A8A' },
+          headerShadowVisible: true,
+          contentStyle: { backgroundColor: '#F8FAFC' },
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -68,7 +68,7 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   centerContainer: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
@@ -76,23 +76,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
     marginBottom: 8,
   },
   loadingText: {
     marginTop: 16,
-    color: '#94A3B8',
+    color: '#64748B',
     fontSize: 15,
     fontWeight: '500',
   },
   errorText: {
-    color: '#F87171',
+    color: '#EF4444',
     fontSize: 14,
     textAlign: 'center',
     marginBottom: 12,
   },
   fallbackNotice: {
-    color: '#34D399',
+    color: '#059669',
     fontSize: 13,
   },
 });

@@ -35,8 +35,8 @@ export default function ProgressScreen() {
 
       if (records.length > 0) {
         const total = records.length;
-        const sumScore = records.reduce((acc, r) => acc + r.score, 0);
-        const sumQuestions = records.reduce((acc, r) => acc + r.totalQuestions, 0);
+        const sumScore = records.reduce((acc: number, r: any) => acc + r.score, 0);
+        const sumQuestions = records.reduce((acc: number, r: any) => acc + r.totalQuestions, 0);
         setStats({
           totalAttempts: total,
           avgScore: Math.round(sumScore / total),
@@ -82,21 +82,21 @@ export default function ProgressScreen() {
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>Quiz Attempt History</Text>
         <TouchableOpacity style={styles.syncButton} onPress={handleSyncNow} disabled={isSyncing}>
-          <Ionicons name="sync-outline" size={14} color="#38BDF8" />
+          <Ionicons name="sync-outline" size={14} color="#2563EB" />
           <Text style={styles.syncButtonText}>{isSyncing ? 'Syncing...' : 'Sync History'}</Text>
         </TouchableOpacity>
       </View>
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
         </View>
       ) : attempts.length === 0 ? (
         <View style={styles.center}>
-          <Ionicons name="bar-chart-outline" size={48} color="#64748B" />
+          <Ionicons name="bar-chart-outline" size={48} color="#94A3B8" />
           <Text style={styles.emptyTitle}>No Quiz Attempts Yet</Text>
           <Text style={styles.emptySubtitle}>
-            Complete practice quizzes to track your weak areas and track your readiness offline!
+            Complete practice quizzes to track your weak areas and test your readiness offline!
           </Text>
         </View>
       ) : (
@@ -127,7 +127,7 @@ export default function ProgressScreen() {
                   <Ionicons
                     name={item.isSynced ? 'checkmark-circle' : 'cloud-offline'}
                     size={12}
-                    color={item.isSynced ? '#34D399' : '#F59E0B'}
+                    color={item.isSynced ? '#059669' : '#D97706'}
                   />
                   <Text
                     style={[
@@ -150,33 +150,33 @@ export default function ProgressScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   statsRow: {
     flexDirection: 'row',
     gap: 10,
     padding: 16,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#EFF6FF',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#BFDBFE',
   },
   statValue: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#38BDF8',
+    color: '#1D4ED8',
   },
   statLabel: {
     fontSize: 11,
-    color: '#94A3B8',
+    color: '#475569',
     marginTop: 2,
     textTransform: 'uppercase',
     fontWeight: '600',
@@ -191,20 +191,22 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
   },
   syncButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    backgroundColor: '#EFF6FF',
+    borderWidth: 1,
+    borderColor: '#BFDBFE',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 6,
   },
   syncButtonText: {
     fontSize: 12,
-    color: '#38BDF8',
+    color: '#2563EB',
     fontWeight: '600',
   },
   center: {
@@ -216,12 +218,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
     marginTop: 12,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     textAlign: 'center',
     marginTop: 6,
     lineHeight: 18,
@@ -234,11 +236,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#1E293B',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 1,
   },
   attemptMain: {
     flex: 1,
@@ -246,12 +253,12 @@ const styles = StyleSheet.create({
   attemptSubject: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   attemptScore: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#38BDF8',
+    fontWeight: '700',
+    color: '#2563EB',
     marginTop: 2,
   },
   attemptDate: {
@@ -268,19 +275,23 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   badgeSynced: {
-    backgroundColor: 'rgba(52, 211, 153, 0.15)',
+    backgroundColor: '#ECFDF5',
+    borderWidth: 1,
+    borderColor: '#A7F3D0',
   },
   badgeOffline: {
-    backgroundColor: 'rgba(245, 158, 11, 0.15)',
+    backgroundColor: '#FFFBEB',
+    borderWidth: 1,
+    borderColor: '#FDE68A',
   },
   syncBadgeText: {
     fontSize: 11,
     fontWeight: '700',
   },
   textSynced: {
-    color: '#34D399',
+    color: '#059669',
   },
   textOffline: {
-    color: '#F59E0B',
+    color: '#D97706',
   },
 });

@@ -215,7 +215,7 @@ export default function QuizEngineScreen() {
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
           <Text style={styles.loadingText}>Loading questions...</Text>
         </View>
       ) : questionsList.length === 0 ? (
@@ -263,15 +263,15 @@ export default function QuizEngineScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   header: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 20,
     paddingTop: 12,
     paddingBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   headerTop: {
     flexDirection: 'row',
@@ -282,22 +282,22 @@ const styles = StyleSheet.create({
   headerUnitTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   headerProgressText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#38BDF8',
+    color: '#2563EB',
   },
   progressBarBackground: {
     height: 6,
-    backgroundColor: '#1E293B',
+    backgroundColor: '#E2E8F0',
     borderRadius: 3,
     overflow: 'hidden',
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#38BDF8',
+    backgroundColor: '#2563EB',
     borderRadius: 3,
   },
   center: {
@@ -307,18 +307,18 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   loadingText: {
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 12,
   },
   emptyTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginTop: 12,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 4,
   },
   scrollArea: {
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   nextButton: {
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',
@@ -342,17 +342,22 @@ const styles = StyleSheet.create({
   },
   resultsContainer: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
     justifyContent: 'center',
     padding: 24,
   },
   resultsCard: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 24,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 3,
   },
   scoreCircle: {
     width: 120,
@@ -365,31 +370,31 @@ const styles = StyleSheet.create({
   },
   scoreCirclePass: {
     borderColor: '#10B981',
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    backgroundColor: '#F0FDF4',
   },
   scoreCircleFail: {
     borderColor: '#EF4444',
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: '#FEF2F2',
   },
   scoreText: {
     fontSize: 32,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   scoreSubText: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 2,
   },
   resultsTitle: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginBottom: 6,
   },
   resultsSubtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#64748B',
     textAlign: 'center',
     lineHeight: 20,
     marginBottom: 16,
@@ -398,7 +403,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+    backgroundColor: '#ECFDF5',
+    borderWidth: 1,
+    borderColor: '#A7F3D0',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
@@ -406,8 +413,8 @@ const styles = StyleSheet.create({
   },
   offlineSavedText: {
     fontSize: 12,
-    color: '#6EE7B7',
-    fontWeight: '500',
+    color: '#065F46',
+    fontWeight: '600',
   },
   resultsActions: {
     width: '100%',
@@ -418,7 +425,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
     paddingVertical: 14,
     borderRadius: 12,
   },
@@ -430,9 +437,13 @@ const styles = StyleSheet.create({
   doneButton: {
     paddingVertical: 12,
     alignItems: 'center',
+    backgroundColor: '#F1F5F9',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   doneButtonText: {
-    color: '#94A3B8',
+    color: '#334155',
     fontSize: 14,
     fontWeight: '600',
   },

@@ -19,7 +19,7 @@ import { SyncManager } from '../../services/syncManager';
 
 export default function SubjectsScreen() {
   const router = useRouter();
-  const { selectedStream, setStream, selectedGrade, setGrade, isGuest } = useAuthStore();
+  const { selectedStream, setStream, selectedGrade, setGrade } = useAuthStore();
   const { isSyncing, syncMessage, pendingAttemptsCount } = useSyncStore();
 
   const [subjectsList, setSubjectsList] = useState<any[]>([]);
@@ -38,9 +38,8 @@ export default function SubjectsScreen() {
           )
         );
 
-      // Fetch unit counts per subject
       const enriched = await Promise.all(
-        data.map(async (subj) => {
+        data.map(async (subj: any) => {
           const units = await db
             .select({ id: schema.units.id })
             .from(schema.units)
@@ -73,12 +72,10 @@ export default function SubjectsScreen() {
     await loadSubjects();
   };
 
-  // Seed sample starter curriculum directly if local database is freshly installed
   const seedLocalStarterData = async () => {
     setLoading(true);
     try {
-      await db.transaction(async (tx) => {
-        // Physics Grade 12
+      await db.transaction(async (tx: any) => {
         await tx
           .insert(schema.subjects)
           .values({
@@ -108,24 +105,7 @@ export default function SubjectsScreen() {
             title: 'First Law of Thermodynamics',
             isHighYield: true,
             orderIndex: 1,
-            contentMarkdown: `# First Law of Thermodynamics
-
-The **First Law of Thermodynamics** states that energy cannot be created or destroyed:
-
-$$\\Delta U = Q - W$$
-
-Where:
-* $\\Delta U$ = change in internal energy
-* $Q$ = heat added to system ($Q > 0$ when absorbed)
-* $W$ = work done by the system ($W = P\\Delta V$ at constant pressure)
-
-### Thermodynamic Processes:
-1. **Isochoric (Constant Volume):** $\\Delta V = 0 \\implies W = 0$, so $\\Delta U = Q$.
-2. **Isobaric (Constant Pressure):** $W = P(V_2 - V_1)$.
-3. **Isothermal (Constant Temp):** $\\Delta U = 0 \\implies Q = W$.
-4. **Adiabatic (No Heat):** $Q = 0 \\implies \\Delta U = -W$.
-
-> **ESSLCE Tip:** In an adiabatic expansion, gas cools down because it does work at the expense of its internal energy!`,
+            contentMarkdown: `# First Law of Thermodynamics\n\n$$\\Delta U = Q - W$$`,
           })
           .onConflictDoNothing();
 
@@ -142,11 +122,10 @@ Where:
               { id: 'opt-d', text: '7.0 × 10⁵ J' },
             ]),
             correctOptionId: 'opt-b',
-            explanation: 'Work done at constant pressure: W = P * ΔV = 1.0 × 10⁵ Pa * (5.0 - 2.0) m³ = 3.0 × 10⁵ J.',
+            explanation: 'W = P * ΔV = 1.0 × 10⁵ * (5 - 2) = 3.0 × 10⁵ J.',
           })
           .onConflictDoNothing();
 
-        // Mathematics Grade 12
         await tx
           .insert(schema.subjects)
           .values({
@@ -176,15 +155,7 @@ Where:
             title: 'Arithmetic & Geometric Progressions',
             isHighYield: true,
             orderIndex: 1,
-            contentMarkdown: `# Sequences and Series
-
-### Arithmetic Progression (AP)
-$$a_n = a_1 + (n - 1)d$$
-$$S_n = \\frac{n}{2}(a_1 + a_n)$$
-
-### Geometric Progression (GP)
-$$a_n = a_1 \\cdot r^{n-1}$$
-$$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
+            contentMarkdown: `# Sequences and Series\n\n$$a_n = a_1 + (n - 1)d$$`,
           })
           .onConflictDoNothing();
 
@@ -201,7 +172,7 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
               { id: 'opt-d', text: '3/4' },
             ]),
             correctOptionId: 'opt-b',
-            explanation: 'S_∞ = a₁ / (1 - r) => 18 = 6 / (1 - r) => 1 - r = 1/3 => r = 2/3.',
+            explanation: 'S_∞ = a₁ / (1 - r) => r = 2/3.',
           })
           .onConflictDoNothing();
       });
@@ -216,7 +187,7 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
 
   return (
     <View style={styles.container}>
-      {/* Stream and Grade Filter Header */}
+      {/* Stream & Grade Filter Section */}
       <View style={styles.filterSection}>
         {/* Stream Pills */}
         <View style={styles.pillsRow}>
@@ -276,12 +247,12 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
       {/* Sync Status Bar */}
       {isSyncing ? (
         <View style={styles.syncBanner}>
-          <ActivityIndicator size="small" color="#38BDF8" />
+          <ActivityIndicator size="small" color="#2563EB" />
           <Text style={styles.syncBannerText}>{syncMessage || 'Syncing delta updates...'}</Text>
         </View>
       ) : pendingAttemptsCount > 0 ? (
         <View style={styles.offlineNoticeBanner}>
-          <Ionicons name="cloud-offline-outline" size={16} color="#F59E0B" />
+          <Ionicons name="cloud-offline-outline" size={16} color="#D97706" />
           <Text style={styles.offlineNoticeText}>
             {pendingAttemptsCount} offline quiz attempt(s) ready to sync
           </Text>
@@ -291,19 +262,19 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
       {/* Subject List */}
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
           <Text style={styles.loadingText}>Loading subjects...</Text>
         </View>
       ) : subjectsList.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="folder-open-outline" size={54} color="#64748B" />
+          <Ionicons name="folder-open-outline" size={54} color="#94A3B8" />
           <Text style={styles.emptyTitle}>No Subjects Installed</Text>
           <Text style={styles.emptySubtitle}>
             No offline curriculum found for {selectedStream} Science (Grade {selectedGrade}).
           </Text>
           <TouchableOpacity style={styles.starterButton} onPress={seedLocalStarterData}>
             <Ionicons name="download-outline" size={18} color="#FFFFFF" />
-            <Text style={styles.starterButtonText}>Load Starter ESSLCE Pack (Offline)</Text>
+            <Text style={styles.starterButtonText}>Load Starter ESSLCE Pack</Text>
           </TouchableOpacity>
         </View>
       ) : (
@@ -327,7 +298,7 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
                 <Ionicons
                   name={item.name === 'Physics' ? 'flash-outline' : 'calculator-outline'}
                   size={26}
-                  color="#38BDF8"
+                  color="#2563EB"
                 />
               </View>
               <View style={styles.subjectInfo}>
@@ -336,7 +307,7 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
                   Grade {item.gradeLevel} • {item.unitCount} {item.unitCount === 1 ? 'Unit' : 'Units'} available
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color="#64748B" />
+              <Ionicons name="chevron-forward" size={20} color="#94A3B8" />
             </TouchableOpacity>
           )}
         />
@@ -348,15 +319,15 @@ $$S_\\infty = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$`,
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   filterSection: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
-    gap: 8,
+    borderBottomColor: '#E2E8F0',
+    gap: 10,
   },
   pillsRow: {
     flexDirection: 'row',
@@ -364,18 +335,21 @@ const styles = StyleSheet.create({
   },
   streamPill: {
     flex: 1,
-    paddingVertical: 8,
-    borderRadius: 8,
-    backgroundColor: '#1E293B',
+    paddingVertical: 9,
+    borderRadius: 10,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   streamPillActive: {
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
+    borderColor: '#1D4ED8',
   },
   streamPillText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#475569',
   },
   streamPillTextActive: {
     color: '#FFFFFF',
@@ -386,53 +360,55 @@ const styles = StyleSheet.create({
   },
   gradePill: {
     flex: 1,
-    paddingVertical: 6,
-    borderRadius: 6,
-    backgroundColor: '#1E293B',
+    paddingVertical: 7,
+    borderRadius: 8,
+    backgroundColor: '#F8FAFC',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
   },
   gradePillActive: {
-    backgroundColor: '#334155',
-    borderWidth: 1,
-    borderColor: '#38BDF8',
+    backgroundColor: '#EFF6FF',
+    borderColor: '#2563EB',
   },
   gradePillText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#64748B',
   },
   gradePillTextActive: {
-    color: '#38BDF8',
+    color: '#2563EB',
+    fontWeight: '700',
   },
   syncBanner: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: 'rgba(56, 189, 248, 0.1)',
-    paddingVertical: 8,
+    backgroundColor: '#EFF6FF',
+    paddingVertical: 9,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(56, 189, 248, 0.2)',
+    borderBottomColor: '#DBEAFE',
   },
   syncBannerText: {
-    fontSize: 12,
-    color: '#38BDF8',
-    fontWeight: '500',
+    fontSize: 13,
+    color: '#1E40AF',
+    fontWeight: '600',
   },
   offlineNoticeBanner: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-    paddingVertical: 8,
+    backgroundColor: '#FFFBEB',
+    paddingVertical: 9,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(245, 158, 11, 0.2)',
+    borderBottomColor: '#FDE68A',
   },
   offlineNoticeText: {
     fontSize: 12,
-    color: '#F59E0B',
-    fontWeight: '500',
+    color: '#B45309',
+    fontWeight: '600',
   },
   loadingContainer: {
     flex: 1,
@@ -440,7 +416,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 12,
     fontSize: 14,
   },
@@ -453,12 +429,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
     marginTop: 16,
   },
   emptySubtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#64748B',
     textAlign: 'center',
     marginTop: 6,
     marginBottom: 20,
@@ -468,7 +444,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -485,20 +461,27 @@ const styles = StyleSheet.create({
   subjectCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#1E293B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   subjectIconBox: {
-    width: 46,
-    height: 46,
+    width: 48,
+    height: 48,
     borderRadius: 12,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#EFF6FF',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 14,
+    borderWidth: 1,
+    borderColor: '#DBEAFE',
   },
   subjectInfo: {
     flex: 1,
@@ -506,11 +489,11 @@ const styles = StyleSheet.create({
   subjectName: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   subjectMeta: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 3,
   },
 });

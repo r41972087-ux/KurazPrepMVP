@@ -29,7 +29,7 @@ export default function SettingsScreen() {
         <View style={styles.card}>
           <View style={styles.profileRow}>
             <View style={styles.avatarBox}>
-              <Ionicons name="person-outline" size={24} color="#38BDF8" />
+              <Ionicons name="person-outline" size={24} color="#2563EB" />
             </View>
             <View style={styles.profileInfo}>
               <Text style={styles.profileName}>
@@ -45,7 +45,7 @@ export default function SettingsScreen() {
 
           {isGuest ? (
             <View style={styles.guestNote}>
-              <Ionicons name="information-circle-outline" size={16} color="#38BDF8" />
+              <Ionicons name="information-circle-outline" size={16} color="#2563EB" />
               <Text style={styles.guestNoteText}>
                 No account required to study or take tests. You can sync quiz scores whenever you go online.
               </Text>
@@ -128,7 +128,7 @@ export default function SettingsScreen() {
           </View>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Unsynced Quiz Attempts</Text>
-            <Text style={[styles.infoValue, { color: pendingAttemptsCount > 0 ? '#F59E0B' : '#34D399' }]}>
+            <Text style={[styles.infoValue, { color: pendingAttemptsCount > 0 ? '#D97706' : '#059669' }]}>
               {pendingAttemptsCount} pending
             </Text>
           </View>
@@ -168,7 +168,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   section: {
     paddingHorizontal: 16,
@@ -177,18 +177,23 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#94A3B8',
+    color: '#64748B',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 8,
     marginLeft: 4,
   },
   card: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 2,
   },
   profileRow: {
     flexDirection: 'row',
@@ -198,7 +203,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: 'rgba(56, 189, 248, 0.15)',
+    backgroundColor: '#EFF6FF',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -209,18 +214,20 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   profileStatus: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 2,
   },
   guestNote: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: 'rgba(56, 189, 248, 0.08)',
+    backgroundColor: '#EFF6FF',
+    borderWidth: 1,
+    borderColor: '#BFDBFE',
     padding: 10,
     borderRadius: 8,
     marginTop: 14,
@@ -228,7 +235,7 @@ const styles = StyleSheet.create({
   guestNoteText: {
     flex: 1,
     fontSize: 12,
-    color: '#7DD3FC',
+    color: '#1E40AF',
     lineHeight: 16,
   },
   logoutButton: {
@@ -237,14 +244,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoutText: {
-    color: '#F87171',
+    color: '#EF4444',
     fontSize: 13,
     fontWeight: '600',
   },
   label: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#CBD5E1',
+    color: '#334155',
     marginBottom: 8,
   },
   buttonGroup: {
@@ -253,21 +260,21 @@ const styles = StyleSheet.create({
   },
   segmentBtn: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#F1F5F9',
     paddingVertical: 10,
     borderRadius: 8,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
   },
   segmentBtnActive: {
-    backgroundColor: '#0284C7',
-    borderColor: '#38BDF8',
+    backgroundColor: '#2563EB',
+    borderColor: '#2563EB',
   },
   segmentBtnText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#64748B',
   },
   segmentBtnTextActive: {
     color: '#FFFFFF',
@@ -275,41 +282,43 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#334155',
+    borderBottomColor: '#F1F5F9',
   },
   infoLabel: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
   },
   infoValue: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   errorBox: {
     marginTop: 10,
     padding: 10,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: '#FEF2F2',
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#FECACA',
   },
   errorText: {
     fontSize: 12,
-    color: '#FCA5A5',
+    color: '#DC2626',
   },
   syncActionBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
     paddingVertical: 12,
     borderRadius: 10,
     marginTop: 16,
   },
   syncActionBtnDisabled: {
-    backgroundColor: '#334155',
+    backgroundColor: '#CBD5E1',
   },
   syncActionBtnText: {
     color: '#FFFFFF',
@@ -321,7 +330,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#475569',
+    color: '#94A3B8',
     fontSize: 12,
   },
 });

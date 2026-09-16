@@ -89,7 +89,7 @@ export default function ShortNoteReaderScreen() {
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
         </View>
       ) : notes.length === 0 ? (
         <View style={styles.center}>
@@ -106,7 +106,7 @@ export default function ShortNoteReaderScreen() {
             <Text style={styles.noteTitle}>{activeNote.title}</Text>
             {activeNote.isHighYield && (
               <View style={styles.highYieldPill}>
-                <Ionicons name="star" size={12} color="#F59E0B" />
+                <Ionicons name="star" size={12} color="#D97706" />
                 <Text style={styles.highYieldPillText}>ESSLCE High Yield</Text>
               </View>
             )}
@@ -134,7 +134,7 @@ export default function ShortNoteReaderScreen() {
               <Text style={styles.calloutTitle}>Ready to test your recall?</Text>
               <Text style={styles.calloutSubtitle}>Take the instant practice quiz for this unit</Text>
             </View>
-            <Ionicons name="arrow-forward-circle" size={28} color="#34D399" />
+            <Ionicons name="arrow-forward-circle" size={28} color="#2563EB" />
           </TouchableOpacity>
         </ScrollView>
       )}
@@ -145,51 +145,51 @@ export default function ShortNoteReaderScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   header: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   unitSub: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#38BDF8',
+    color: '#2563EB',
     textTransform: 'uppercase',
   },
   unitTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginTop: 2,
   },
   tabsContainer: {
     paddingHorizontal: 16,
     paddingVertical: 10,
     gap: 8,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   noteTab: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#F1F5F9',
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
   },
   noteTabActive: {
-    backgroundColor: '#0284C7',
-    borderColor: '#38BDF8',
+    backgroundColor: '#2563EB',
+    borderColor: '#2563EB',
   },
   noteTabText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#94A3B8',
+    color: '#64748B',
   },
   noteTabTextActive: {
     color: '#FFFFFF',
@@ -203,12 +203,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginTop: 12,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 4,
   },
   contentScroll: {
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   noteTitle: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#0F172A',
     lineHeight: 28,
   },
   highYieldPill: {
@@ -232,9 +232,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     gap: 4,
-    backgroundColor: 'rgba(245, 158, 11, 0.15)',
+    backgroundColor: '#FEF3C7',
     borderWidth: 1,
-    borderColor: '#F59E0B',
+    borderColor: '#FDE68A',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 6,
@@ -243,18 +243,23 @@ const styles = StyleSheet.create({
   highYieldPillText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#F59E0B',
+    color: '#D97706',
   },
   quizCallout: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#1E293B',
-    borderWidth: 1,
-    borderColor: '#10B981',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1.5,
+    borderColor: '#2563EB',
     borderRadius: 14,
     padding: 16,
     marginTop: 28,
+    shadowColor: '#2563EB',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 2,
   },
   calloutTextContainer: {
     flex: 1,
@@ -263,11 +268,11 @@ const styles = StyleSheet.create({
   calloutTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   calloutSubtitle: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 2,
   },
 });

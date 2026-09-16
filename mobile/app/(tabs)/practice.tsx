@@ -29,9 +29,8 @@ export default function PracticeScreen() {
         .from(schema.units)
         .innerJoin(schema.subjects, eq(schema.units.subjectId, schema.subjects.id));
 
-      // Fetch questions count for each unit
       const enriched = await Promise.all(
-        units.map(async (u) => {
+        units.map(async (u: any) => {
           const qs = await db
             .select({ id: schema.questions.id })
             .from(schema.questions)
@@ -63,11 +62,11 @@ export default function PracticeScreen() {
 
       {loading ? (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
         </View>
       ) : unitsList.length === 0 ? (
         <View style={styles.centerContainer}>
-          <Ionicons name="help-circle-outline" size={48} color="#64748B" />
+          <Ionicons name="help-circle-outline" size={48} color="#94A3B8" />
           <Text style={styles.emptyTitle}>No Practice Quizzes Yet</Text>
           <Text style={styles.emptySubtitle}>
             Go to the Study tab to initialize or sync curriculum units.
@@ -126,22 +125,22 @@ export default function PracticeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   header: {
     padding: 18,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
   },
   headerSubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 4,
     lineHeight: 18,
   },
@@ -154,12 +153,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E3A8A',
     marginTop: 12,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     textAlign: 'center',
     marginTop: 4,
   },
@@ -171,11 +170,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#1E293B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   unitInfo: {
     flex: 1,
@@ -188,7 +192,9 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   subjectBadge: {
-    backgroundColor: 'rgba(56, 189, 248, 0.15)',
+    backgroundColor: '#EFF6FF',
+    borderWidth: 1,
+    borderColor: '#BFDBFE',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 6,
@@ -196,17 +202,17 @@ const styles = StyleSheet.create({
   subjectBadgeText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#38BDF8',
+    color: '#1D4ED8',
     textTransform: 'uppercase',
   },
   gradeText: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#64748B',
   },
   unitTitle: {
     fontSize: 15,
-    fontWeight: '600',
-    color: '#F8FAFC',
+    fontWeight: '700',
+    color: '#0F172A',
   },
   metaText: {
     fontSize: 12,
@@ -217,13 +223,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: '#0284C7',
+    backgroundColor: '#2563EB',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 10,
   },
   disabledButton: {
-    backgroundColor: '#334155',
+    backgroundColor: '#94A3B8',
   },
   startQuizText: {
     color: '#FFFFFF',

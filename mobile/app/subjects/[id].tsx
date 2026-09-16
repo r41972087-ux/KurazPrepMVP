@@ -84,7 +84,7 @@ export default function SubjectUnitsScreen() {
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator size="large" color="#38BDF8" />
+          <ActivityIndicator size="large" color="#2563EB" />
         </View>
       ) : unitsList.length === 0 ? (
         <View style={styles.center}>
@@ -176,22 +176,22 @@ export default function SubjectUnitsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#F8FAFC',
   },
   headerBanner: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FFFFFF',
     padding: 18,
     borderBottomWidth: 1,
-    borderBottomColor: '#1E293B',
+    borderBottomColor: '#E2E8F0',
   },
   subjectTitle: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#0F172A',
   },
   subjectSubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 4,
   },
   center: {
@@ -203,12 +203,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
     marginTop: 12,
   },
   emptySubtitle: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 4,
   },
   listContent: {
@@ -216,11 +216,16 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   unitCard: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#FFFFFF',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 2,
   },
   unitHeader: {
     flexDirection: 'row',
@@ -229,35 +234,35 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   unitNumberBadge: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#EFF6FF',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#BFDBFE',
   },
   unitNumberText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#38BDF8',
+    color: '#2563EB',
   },
   highYieldBadge: {
-    backgroundColor: 'rgba(245, 158, 11, 0.15)',
+    backgroundColor: '#FEF3C7',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#F59E0B',
+    borderColor: '#FDE68A',
   },
   highYieldText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#F59E0B',
+    color: '#D97706',
   },
   unitTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#0F172A',
     lineHeight: 22,
     marginBottom: 8,
   },
@@ -268,7 +273,7 @@ const styles = StyleSheet.create({
   },
   metaText: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
   },
   actionsRow: {
     flexDirection: 'row',
@@ -284,14 +289,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   notesBtn: {
-    backgroundColor: '#0369A1',
+    backgroundColor: '#2563EB',
   },
   quizBtn: {
-    backgroundColor: '#059669',
+    backgroundColor: '#0284C7',
   },
   disabledBtn: {
-    backgroundColor: '#334155',
-    opacity: 0.5,
+    backgroundColor: '#CBD5E1',
+    opacity: 0.6,
   },
   actionBtnText: {
     color: '#FFFFFF',
